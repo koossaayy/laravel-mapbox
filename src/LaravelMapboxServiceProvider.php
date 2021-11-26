@@ -26,8 +26,4 @@ class LaravelMapboxServiceProvider extends PackageServiceProvider
     {
         Blade::component('mapbox', Mapbox::class);
     }
-
-
-
-
 }

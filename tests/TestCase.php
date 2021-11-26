@@ -3,13 +3,14 @@
 namespace Koossaayy\LaravelMapbox\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
-use Orchestra\Testbench\TestCase as Orchestra;
-use Koossaayy\LaravelMapbox\LaravelMapboxServiceProvider;
 use Illuminate\Foundation\Testing\Concerns\InteractsWithViews;
+use Koossaayy\LaravelMapbox\LaravelMapboxServiceProvider;
+use Orchestra\Testbench\TestCase as Orchestra;
 
 class TestCase extends Orchestra
 {
     use InteractsWithViews;
+
     protected function setUp(): void
     {
         parent::setUp();
