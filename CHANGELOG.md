@@ -2,6 +2,6 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
-## 1.0.0 - 202X-XX-XX
+## 0.0.1 - 2021-29-11
 
 - initial release

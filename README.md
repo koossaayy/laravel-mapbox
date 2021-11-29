@@ -6,6 +6,9 @@
 [![Total Downloads](https://img.shields.io/packagist/dt/koossaayy/laravel-mapbox.svg?style=flat-square)](https://packagist.org/packages/koossaayy/laravel-mapbox)
 
 ---
+
+<img src="https://banners.beyondco.de/Laravel%20Mapbox.png?theme=dark&packageManager=composer+require&packageName=koossaayy%2Flaravel-mapbox&pattern=architect&style=style_1&description=Easily+Integrate+Mapbox+into+your+Laravel+application&md=1&showWatermark=1&fontSize=100px&images=https%3A%2F%2Flaravel.com%2Fimg%2Flogomark.min.svg" >
+
 Easily inetgrate mapbox maps to your Laravel app using only blade components. 
 
 
@@ -45,17 +48,68 @@ return [
 ## Usage
 
 The goal of this package is to use Blade components to render Mapbox GL maps. 
-To show a basic map, you can use this component with the ```id``` param :
+
+Before start using the component, you must include the CSS and JS files in the file where you want to add your map: 
+```html
+    <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
+
+```
+
+To show a basic map, you can use the component as follows :
 ```html
 <x-mapbox id="mapId" />
 ```
 
+Note: The ```id``` parameter is mandatory since int's used by Mapbox JS. 
+
+Next, here's how you can use the component with other options.
 
 
-Also you can show/hide navigation controls (Zoom in/Zoom out/Rotation): 
+To show/hide navigation controls (Zoom in/Zoom out/Rotation), you can use ``` :navigationControls ``` attirbute  as follows: 
 ```html
 <x-mapbox id="mapId" :navigationControls="true" />
 ```
+To customize the map style (not to be confused with default style like width and height...), using either [Mapbpox predefined styles or your own styles](https://docs.mapbox.com/mapbox-gl-js/api/map/#:~:text=to%20ScrollZoomHandler%23enable%20.-,options.style,-(Object%20%7C%20string)), you can use ``` mapStyle ``` attribute as follows : 
+
+```html
+<x-mapbox id="mapId" mapStyle="mapbox/navigation-night-v1"/>
+```
+
+Note : Providing a wrong style identifier will result some glitches in showing the map. 
+
+To center the camera of the map, in a certain point, you can use ``` :center ``` attribute as follows:
+
+```html
+<x-mapbox id="mapId" :center="['long' => 8, 'lat'=>10]"/>
+```
+
+To control the map interactivity (Enable/Disable mouse events like dragging or zooming), you may use 
+the ``` :interactive ``` attribute, as follows :
+
+```html
+<x-mapbox id="mapId" :interactive="false"/>
+```
+
+To add markers to your map, you can use the ``` :markers ``` attribute, as follows :
+
+```html
+<x-mapbox id="mapId"
+ :markers="[['lat' => 8,'long' => 10,'description' => 'helloworld' ], ['lat'=> 9,'long' => 10]]" />
+```
+The ``` :markers ``` attribute accepts an array of arrays, each array have a ``` long ``` and ``` lat ``` keys. 
+If you want to add a popup description, you may use the ``` description ``` key.
+
+It's recommended to add around 20 markers to each map, for performance reasons.
+
+To control the style of the map (width, height, etc... Not to be confused with mapStyle attribute), you can use the   ``` style ``` and ``` class ``` attributes as follows : 
+
+```html
+<x-mapbox id="mapId" style="height: 500px; width: 500px;" class="hellomap"/>
+```
+
+
+
 Here's a full example, with all options you can use: 
 
 ```html
@@ -67,9 +121,7 @@ Here's a full example, with all options you can use:
     :center="['long' => 8, 'lat'=>10]"
     :navigationControls="true"
     :interactive="false"
-    :markers="[['lat' => 8,'long' => 10,'description' => 'helloworld' ], ['lat'=> 9,'long' => 10]]" />
-
-
+    :markers="[['long' => 8,'lat' => 10,'description' => 'helloworld' ], ['long'=> 9,'lat' => 10]]" />
 ```
 
 
