@@ -12,9 +12,12 @@ class Mapbox extends Component
         public array $center = [0,0],
         public int $zoom = 8,
         public bool $navigationControls = false,
+        public bool $cooperativeGestures = false,
+        public bool $rtl = false,
         public string $mapStyle = 'mapbox/streets-v11',
         public bool $interactive = true,
         public array $markers = [],
+        public bool $draggable = false,
     ) {
     }
 

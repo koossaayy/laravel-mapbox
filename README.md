@@ -110,6 +110,33 @@ To control the style of the map (width, height, etc... Not to be confused with m
 <x-mapbox id="mapId" style="height: 500px; width: 500px;" class="hellomap"/>
 ```
 
+To add RTL support to show Arabic/Hebrew,etc... names correctly, you may use the ```:rtl``` attribute, as follows
+
+```html
+<x-mapbox id="mapId" style="height: 500px; width: 500px;" :rtl="true"/>
+```
+To add cooperative gestures (This allows the user to scroll the page without unintentionally zooming or panning the map.), you may use ```:cooperativeGestures``` attribute as follows: 
+```html
+<x-mapbox id="mapId" style="height: 500px; width: 500px;" :cooperativeGestures="true"/>
+```
+
+In some cases, you want a draggable marker, for example, when you want the end user to select a point on the map and then return its coordinates, in that case, you can use the ```:draggable``` attribute as follows : 
+```html
+<x-mapbox id="mapId" style="height: 500px; width: 500px;" :draggable="true"/>
+```
+This will render a draggable marker. In order to get the coordinates of the marker, you must add the following JavaScriot code after the ````<x-mapbox></x-mapbox>``` component as follows 
+```html
+<script>
+    marker.on('dragend', function(e) {
+        /*here you can get the coordinates as follows 
+        * e.target.getLngLat().lng : to get the longitude
+        * e.target.getLngLat().lat : to get the latitude
+        */
+    });
+</script>
+```
+
+
 
 
 Here's a full example, with all options you can use: 

@@ -82,3 +82,21 @@ it('render map with the correspendant classes', function () {
     $view = $this->blade('<x-mapbox id="map" class="helloworld"  style="height: 500px; max-width:600px; width: 500px;" />');
     $view->assertSee('helloworld');
 });
+
+
+
+it('render map with rtl plugin when rtl config is enabled', function () {
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'rtl' => true]);
+    $view->assertSee('mapbox-gl-rtl-text.js');
+});
+
+
+it('render map cooperative gestures ', function () {
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'cooperativeGestures' => true]);
+    $view->assertSee('cooperativeGestures');
+});
+
+it('render map with draggable options ', function () {
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'draggable' => true]);
+    $view->assertSee('draggable');
+});
