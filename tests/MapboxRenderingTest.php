@@ -100,7 +100,3 @@ it('render map with draggable options ', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'draggable' => true]);
     $view->assertSee('draggable');
 });
-
-
-
-
