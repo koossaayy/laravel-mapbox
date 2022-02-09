@@ -20,7 +20,6 @@ jobs:
             testbench: ^6.23
             php: 7.3
 
-
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
     steps:
