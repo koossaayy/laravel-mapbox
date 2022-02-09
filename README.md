@@ -1,4 +1,6 @@
-# Easily Integration of Mapbox inside your Laravel application
+# Laravel Mapbox
+
+Easily Integration of Mapbox inside your Laravel application
 
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/koossaayy/laravel-mapbox.svg?style=flat-square)](https://packagist.org/packages/koossaayy/laravel-mapbox)
 [![GitHub Tests Action Status](https://img.shields.io/github/workflow/status/koossaayy/laravel-mapbox/run-tests?label=tests)](https://github.com/koossaayy/laravel-mapbox/actions?query=workflow%3Arun-tests+branch%3Amain)
@@ -22,19 +24,20 @@ You can install the package via composer:
 composer require koossaayy/laravel-mapbox
 ```
 
-After installing the package, create an account [here](https://mapbox.com) and get yor token. 
+After installing the package, [create an account](https://mapbox.com) on MapBox and get your token. 
 
-Then  add this configuration line to your ```.env``` file
+Expose that token in your `.env` file as below:
 
 ```
 MAPBOX_TOKEN={your mapbox token here}
 ```
 For example 
+
 ```
 MAPBOX_TOKEN=pk.eyJ1IjoiiJjddd20yaDIzdmgwzWpqMm9vMDVrb3I1c2QzIn0.jepDEulAySscpF3o3w
 ```
 
-lastly, publish your config file with:
+Don't forget to publish your config file using:
 ```bash
 php artisan vendor:publish --tag="mapbox-config"
 ```
@@ -51,11 +54,11 @@ return [
 
 The goal of this package is to use Blade components to render Mapbox GL maps. 
 
-Before start using the component, you must include the CSS and JS files in the file where you want to add your map: 
+Before starting using this component, you must include the CSS and JS files in the file where you want to display your map:
+
 ```html
     <link href='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.css' rel='stylesheet' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v2.6.0/mapbox-gl.js'></script>
-
 ```
 
 To show a basic map, you can use the component as follows :
@@ -63,83 +66,85 @@ To show a basic map, you can use the component as follows :
 <x-mapbox id="mapId" />
 ```
 
-Note: The ```id``` parameter is mandatory since int's used by Mapbox JS. 
+Note: The `id` parameter is mandatory since it's used by Mapbox JS. 
 
-Next, here's how you can use the component with other options.
+Next, here's how you can use the component with other options:
 
 
-To show/hide navigation controls (Zoom in/Zoom out/Rotation), you can use ``` :navigationControls ``` attirbute  as follows: 
+To show/hide navigation controls (Zoom in/Zoom out/Rotation), you can the use `:navigationControls` attribute as follows: 
 ```html
 <x-mapbox id="mapId" :navigationControls="true" />
 ```
-To customize the map style (not to be confused with default style like width and height...), using either [Mapbpox predefined styles or your own styles](https://docs.mapbox.com/mapbox-gl-js/api/map/#:~:text=to%20ScrollZoomHandler%23enable%20.-,options.style,-(Object%20%7C%20string)), you can use ``` mapStyle ``` attribute as follows : 
+
+To customize the map style (not to be confused with default style like width and height...), using either [Mapbpox predefined styles or your own styles](https://docs.mapbox.com/mapbox-gl-js/api/map/#:~:text=to%20ScrollZoomHandler%23enable%20.-,options.style,-(Object%20%7C%20string)), you can use the `mapStyle` attribute as follows : 
 
 ```html
 <x-mapbox id="mapId" mapStyle="mapbox/navigation-night-v1"/>
 ```
 
-Note : Providing a wrong style identifier will result some glitches in showing the map. 
+Note: Providing a wrong style identifier will result in some glitches while showing the map. 
 
-To center the camera of the map, in a certain point, you can use ``` :center ``` attribute as follows:
+To center the camera of the map, on a certain point, you can use the `:center` attribute as follows:
 
 ```html
-<x-mapbox id="mapId" :center="['long' => 8, 'lat'=>10]"/>
+<x-mapbox id="mapId" :center="['long' => 8, 'lat' => 10]"/>
 ```
 
-To control the map interactivity (Enable/Disable mouse events like dragging or zooming), you may use 
-the ``` :interactive ``` attribute, as follows :
+To control the map interactivity (Enable/Disable mouse events like dragging or zooming), you can use 
+the `:interactive` attribute, as follows :
 
 ```html
 <x-mapbox id="mapId" :interactive="false"/>
 ```
 
-To add markers to your map, you can use the ``` :markers ``` attribute, as follows :
+To add markers to your map, you can use the `:markers` attribute, as follows :
 
 ```html
 <x-mapbox id="mapId"
- :markers="[['lat' => 8,'long' => 10,'description' => 'helloworld' ], ['lat'=> 9,'long' => 10]]" />
+ :markers="[['lat' => 8, 'long' => 10, 'description' => 'helloworld'], ['lat'=> 9, 'long' => 10]]" />
 ```
-The ``` :markers ``` attribute accepts an array of arrays, each array have a ``` long ``` and ``` lat ``` keys. 
-If you want to add a popup description, you may use the ``` description ``` key.
 
-It's recommended to add around 20 markers to each map, for performance reasons.
+The `:markers` attribute accepts an array of arrays, each array must have at least the `long` and `lat` keys. 
+If you want to add a popup description, you may use the `description` key.
 
-To control the style of the map (width, height, etc... Not to be confused with mapStyle attribute), you can use the   ``` style ``` and ``` class ``` attributes as follows : 
+It's recommended to keep the number of markers to a max of 20, for performance reasons.
+
+To control the style of the map (width, height, etc... Not to be confused with the `mapStyle` attribute), you can use the `style` and `class` attributes as follows : 
 
 ```html
 <x-mapbox id="mapId" style="height: 500px; width: 500px;" class="hellomap"/>
 ```
 
-To add RTL support to show Arabic/Hebrew,etc... names correctly, you may use the ```:rtl``` attribute, as follows
+To add RTL support to show Arabic/Hebrew, etc... names correctly, you can use the `:rtl` attribute, as follows
 
 ```html
 <x-mapbox id="mapId" style="height: 500px; width: 500px;" :rtl="true"/>
 ```
-To add cooperative gestures (This allows the user to scroll the page without unintentionally zooming or panning the map.), you may use ```:cooperativeGestures``` attribute as follows: 
+
+To add cooperative gestures (This allows the user to scroll the page without unintentionally zooming or panning the map.), you may use `:cooperativeGestures` attribute as follows: 
+
 ```html
 <x-mapbox id="mapId" style="height: 500px; width: 500px;" :cooperativeGestures="true"/>
 ```
 
-In some cases, you want a draggable marker, for example, when you want the end user to select a point on the map and then return its coordinates, in that case, you can use the ```:draggable``` attribute as follows : 
+In some cases, you want a draggable marker, for example, when you want the end user to select a point on the map and then return its coordinates, in that case, you can use the `:draggable` attribute as follows:
+
 ```html
 <x-mapbox id="mapId" style="height: 500px; width: 500px;" :draggable="true"/>
 ```
-This will render a draggable marker. In order to get the coordinates of the marker, you must add the following JavaScriot code after the ````<x-mapbox></x-mapbox>``` component as follows 
-```html
-<script>
-    marker.on('dragend', function(e) {
-        /*here you can get the coordinates as follows 
-        * e.target.getLngLat().lng : to get the longitude
-        * e.target.getLngLat().lat : to get the latitude
-        */
-    });
-</script>
+
+This will render a draggable marker. In order to get the coordinates of the marker, you must add the following JavaScriot code after the `<x-mapbox />` component as follows:
+
+```js
+marker.on('dragend', function(e) {
+    /*here you can get the coordinates as follows 
+    * e.target.getLngLat().lng : to get the longitude
+    * e.target.getLngLat().lat : to get the latitude
+    */
+});
 ```
 
-
-
-
-Here's a full example, with all options you can use: 
+Here's a full example, with all options being used: 
 
 ```html
 <x-mapbox 
@@ -147,10 +152,10 @@ Here's a full example, with all options you can use:
     class="hellomap" 
     style="height: 500px; width: 500px;" 
     mapStyle="mapbox/navigation-night-v1"
-    :center="['long' => 8, 'lat'=>10]"
+    :center="['long' => 8, 'lat' => 10]"
     :navigationControls="true"
     :interactive="false"
-    :markers="[['long' => 8,'lat' => 10,'description' => 'helloworld' ], ['long'=> 9,'lat' => 10]]" />
+    :markers="[['long' => 8, 'lat' => 10,'description' => 'helloworld'], ['long' => 9, 'lat' => 10]]" />
 ```
 
 
@@ -169,24 +174,6 @@ Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed re
 ## Contributing
 
 Please see [CONTRIBUTING](.github/CONTRIBUTING.md) for details.
-
-## Security Vulnerabilities
-
-Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
-
-## Support Spatie
-
-[<img src="https://github-ads.s3.eu-central-1.amazonaws.com/laravel-mapbox.jpg?t=1" width="419px" />](https://spatie.be/github-ad-click/laravel-mapbox)
-
-We invest a lot of resources into creating [best in class open source packages](https://spatie.be/open-source). You can support us by [buying one of our paid products](https://spatie.be/open-source/support-us).
-
-We highly appreciate you sending us a postcard from your hometown, mentioning which of our package(s) you are using. You'll find our address on [our contact page](https://spatie.be/about-us). We publish all received postcards on [our virtual postcard wall](https://spatie.be/open-source/postcards).
-
-
-## Credits
-
-- [koossaayy](https://github.com/koossaayy)
-- [All Contributors](../../contributors)
 
 ## License
 
