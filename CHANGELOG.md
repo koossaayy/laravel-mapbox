@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## v0.3.0 - 2022-07-23
+
+### What's Changed
+
+- added search component and updating documentations & dependencies by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/6
+
+**Full Changelog**: https://github.com/koossaayy/laravel-mapbox/compare/v0.2.1...v0.3.0
+
 ## Laravel 9 Support - 2022-02-08
 
 Laravel 9 Support
