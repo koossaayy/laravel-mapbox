@@ -1,6 +1,7 @@
 <?php
 
 use Koossaayy\LaravelMapbox\Components\Mapbox;
+use Koossaayy\LaravelMapbox\Components\MapboxSearch;
 
 it('can be rendered')
     ->blade('<x-mapbox id="map" />')
@@ -100,3 +101,10 @@ it('render map with draggable options ', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'draggable' => true]);
     $view->assertSee('draggable');
 });
+
+it('render search component', function () {
+    $view = $this->component(MapboxSearch::class, ['id' => 'map', 'search' => true]);
+    $view->assertSee('MapboxGeocoder');
+});
+
+
