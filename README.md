@@ -158,6 +158,50 @@ Here's a full example, with all options being used:
     :markers="[['long' => 8, 'lat' => 10,'description' => 'helloworld'], ['long' => 9, 'lat' => 10]]" />
 ```
 
+In addition to regular map component, we added the map search component. This will add a search bar into the map container, and will allow the end user to search for places. <br>
+Before start using the search component, you must add the Mapbox geocoding plugin.
+```html
+<script src="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.min.js"></script>
+
+<link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
+
+```
+**_NOTE:_**  The plugin must be imported after the Mapbox JS and CSS files.
+
+After importing the geocoding plugin, now you can use the search component as follows: <br>
+```html
+<x-mapbox-search id="mapId" />
+```
+The example below, is the search component with full options: <br>
+```html
+<x-mapbox-search 
+        id="mapId" 
+        placeholder="Search" 
+        :center="[14, 17]" 
+        :zoom="2" 
+        :navigationControls="true"
+        :geocoderPosition="top-left"
+        :rtl="true"
+        :cooperativeGestures="true"
+    />
+```
+As the example illustrates, the only difference here is the geocoder position, which is the position of the search input. It can be one of those `['top-left', 'top-right', 'bottom-left','bottom-right']`
+
+In order to listen to the change event, you need to add the `result` event listener, so you can get the result object. 
+```js
+geocoder.on('result', function(event) {
+    /**
+    * Here you can lisen to the result event and get the result
+    * for example you can get the longitude, atitude, and the place name as follows:
+    * const long = event.result.geometry.coordinates[0];
+    * const lat = event.result.geometry.coordinates[1];
+    * const name = name = event.result.place_name;
+    */
+});
+```
+
+
+
 
 ## Testing
 
