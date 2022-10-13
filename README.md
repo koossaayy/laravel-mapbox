@@ -104,10 +104,29 @@ To add markers to your map, you can use the `:markers` attribute, as follows :
  :markers="[['lat' => 8, 'long' => 10, 'description' => 'helloworld'], ['lat'=> 9, 'long' => 10]]" />
 ```
 
+
 The `:markers` attribute accepts an array of arrays, each array must have at least the `long` and `lat` keys. 
 If you want to add a popup description, you may use the `description` key.
 
-It's recommended to keep the number of markers to a max of 20, for performance reasons.
+Also you can customize the marker icons, instead of using the default ones provided by Mapbox. 
+To do so you can add `icon` key to the array of markers as follows: 
+```php
+$icon = '<img src="https://placekitten.com/g/50/50" style="border-radius: 50%" />';
+```
+
+
+```html
+<x-mapbox id="mapId"
+ :markers="[['lat' => 8, 'long' => 10, 'description' => 'helloworld', 'icon' => $icon], ['lat'=> 9, 'long' => 10]]" />
+```
+
+> **Note**
+> Please notice that `icon` key accepts HTML, and it will render it, so if you are getting your data from your users, please make sure to sanitize it before using it. 
+
+> **Note**
+> It's recommended to keep the number of markers to a max of 20, for performance reasons.
+
+
 
 To control the style of the map (width, height, etc... Not to be confused with the `mapStyle` attribute), you can use the `style` and `class` attributes as follows : 
 
@@ -166,7 +185,10 @@ Before start using the search component, you must add the Mapbox geocoding plugi
 <link rel="stylesheet" href="https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-geocoder/v5.0.0/mapbox-gl-geocoder.css" type="text/css">
 
 ```
-**_NOTE:_**  The plugin must be imported after the Mapbox JS and CSS files.
+> **Note**
+> The plugin must be imported after the Mapbox JS and CSS files.
+
+
 
 After importing the geocoding plugin, now you can use the search component as follows: <br>
 ```html
