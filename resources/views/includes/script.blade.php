@@ -3,9 +3,9 @@
 
     @if ($rtl ?? '')
         mapboxgl.setRTLTextPlugin(
-        'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
-        null,
-        true
+            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+            null,
+            true
         );
     @endif
 
@@ -29,20 +29,36 @@
         let long = 0;
         let lat = 0;
         const marker = new mapboxgl.Marker({
-        draggable: true
-        })
-        .setLngLat([0, 0])
-        .addTo(map);
+                draggable: true
+            })
+            .setLngLat([0, 0])
+            .addTo(map);
     @endif
 
     @foreach ($markers as $key => $marker)
-        new mapboxgl.Marker()
-        .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
-        @isset($marker['description'])
-            .setPopup(new mapboxgl.Popup({
-            offset: 25
-            }).setText('{{ $marker['description'] }}'))
-        @endisset
-        .addTo(map);
+
+
+        @if (isset($marker['icon']))
+            const el = document.createElement('div');
+            el.className = 'marker';
+            el.innerHTML = `{!! $marker['icon'] !!}`;
+            new mapboxgl.Marker(el)
+                .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
+            @isset($marker['description'])
+                .setPopup(new mapboxgl.Popup({
+                    offset: 25
+                }).setText('{{ $marker['description'] }}'))
+            @endisset
+            .addTo(map);
+        @else
+            new mapboxgl.Marker()
+                .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
+            @isset($marker['description'])
+                .setPopup(new mapboxgl.Popup({
+                    offset: 25
+                }).setText('{{ $marker['description'] }}'))
+            @endisset
+            .addTo(map);
+        @endif
     @endforeach
 </script>

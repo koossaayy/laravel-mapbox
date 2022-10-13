@@ -61,7 +61,7 @@ it('can render map with custom style', function () {
 });
 
 it('it can render map with center point', function () {
-    $view = $this->component(Mapbox::class, ['id' => 'map', 'center' => ['long' => 12,'lat' => 10]]);
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'center' => ['long' => 12, 'lat' => 10]]);
     $view->assertSee('[12, 10]');
     $view->assertDontsee('[10, 12]');
 });
@@ -107,4 +107,10 @@ it('render search component', function () {
     $view->assertSee('MapboxGeocoder');
 });
 
-
+it('render a custom marker icon', function () {
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'markers' => [
+        ['lat' => '1', 'long' => '1', 'icon' => '<img src="https://placekitten.com/g/50/50" style="border-radius: 50%" />'],
+        ['lat' => '2', 'long' => '2'],
+    ]]);
+    $view->assertSee('https://placekitten.com/g/50/50');
+});
