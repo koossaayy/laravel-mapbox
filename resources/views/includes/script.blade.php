@@ -39,10 +39,10 @@
 
 
         @if (isset($marker['icon']))
-            const el = document.createElement('div');
-            el.className = 'marker';
-            el.innerHTML = `{!! $marker['icon'] !!}`;
-            new mapboxgl.Marker(el)
+            const el{{ $key }} = document.createElement('div');
+            el{{ $key }}.className = 'marker';
+            el{{ $key }}.innerHTML = `{!! $marker['icon'] !!}`;
+            new mapboxgl.Marker(el{{ $key }})
                 .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
             @isset($marker['description'])
                 .setPopup(new mapboxgl.Popup({
