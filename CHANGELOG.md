@@ -2,6 +2,14 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## Marker Customization support - 2022-10-13
+
+### What's Changed
+
+- Adding marker customization by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/8
+
+**Full Changelog**: https://github.com/koossaayy/laravel-mapbox/compare/v0.3.0...v0.4.0
+
 ## v0.3.0 - 2022-07-23
 
 ### What's Changed
