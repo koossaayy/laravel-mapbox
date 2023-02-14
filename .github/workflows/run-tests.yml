@@ -12,7 +12,7 @@ jobs:
         php: [8.1]
         laravel: [10.*]
         stability: [prefer-stable]
-        testbench: [8.0]
+        testbench: [8.*]
         include:
           - laravel: 10.*
             testbench: 8.*
