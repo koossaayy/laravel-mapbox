@@ -201,7 +201,7 @@ The example below, is the search component with full options: <br>
         :center="[14, 17]" 
         :zoom="2" 
         :navigationControls="true"
-        :geocoderPosition="top-left"
+        geocoderPosition="top-left"
         :rtl="true"
         :cooperativeGestures="true"
     />
