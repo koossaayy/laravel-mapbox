@@ -114,3 +114,8 @@ it('render a custom marker icon', function () {
     ]]);
     $view->assertSee('https://placekitten.com/g/50/50');
 });
+
+it('can accept the position as param', function () {
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'position' => 'relative']);
+    $view->assertSee('relative');
+});
