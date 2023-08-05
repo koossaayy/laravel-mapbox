@@ -69,6 +69,11 @@ Note: The `id` parameter is mandatory since it's used by Mapbox JS.
 
 Next, here's how you can use the component with other options:
 
+In some scenarios, you may want to control the `position` CSS attribute of the map, you can do that with the `position` parameter. 
+The default value will be `absolute` as the documentation in Mapbox.
+```html
+<x-mapbox id="mapId" position="relative" />
+```
 
 To show/hide navigation controls (Zoom in/Zoom out/Rotation), you can the use `:navigationControls` attribute as follows: 
 ```html
