@@ -9,7 +9,7 @@ class Mapbox extends Component
 {
     public function __construct(
         public String $id,
-        public array $center = [0,0],
+        public array $center = [0, 0],
         public int $zoom = 8,
         public bool $navigationControls = false,
         public bool $cooperativeGestures = false,
@@ -18,6 +18,7 @@ class Mapbox extends Component
         public bool $interactive = true,
         public array $markers = [],
         public bool $draggable = false,
+        public string $position = 'absolute',
     ) {
     }
 
