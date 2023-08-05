@@ -2,6 +2,17 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## 0.4.3 - 2023-08-05
+
+### What's Changed
+
+- Add tests by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/12
+- Fix the geocoderPosition documentation by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/14
+- Add map position as param by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/16
+- Updating docs by @koossaayy in https://github.com/koossaayy/laravel-mapbox/pull/17
+
+**Full Changelog**: https://github.com/koossaayy/laravel-mapbox/compare/v0.4.2...v0.4.3
+
 ## v0.4.1 - 2022-10-13
 
 ### What's Changed
