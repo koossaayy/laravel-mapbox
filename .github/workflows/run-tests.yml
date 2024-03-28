@@ -9,13 +9,11 @@ jobs:
       fail-fast: true
       matrix:
         os: [ubuntu-latest]
-        php: [8.1]
-        laravel: [10.*]
+        php: [8.2]
+        laravel: [10.*, 11.*]
         stability: [prefer-stable]
-        testbench: [8.*]
         include:
           - laravel: 10.*
-            testbench: 8.*
 
 
 
@@ -38,8 +36,14 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
       - name: Install dependencies
+        if: matrix.laravel == '10.*'
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:8.*" --no-interaction --no-update
+          composer update --${{ matrix.stability }} --prefer-dist --no-interaction
+      - name: Install dependencies
+        if: matrix.laravel == '11.*'
+        run: |
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:9.*" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/pest
