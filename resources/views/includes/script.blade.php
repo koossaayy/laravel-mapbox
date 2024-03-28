@@ -35,30 +35,37 @@
             .addTo(map);
     @endif
 
+    let markerInLoop
+
     @foreach ($markers as $key => $marker)
 
-
         @if (isset($marker['icon']))
+
             const el{{ $key }} = document.createElement('div');
             el{{ $key }}.className = 'marker';
             el{{ $key }}.innerHTML = `{!! $marker['icon'] !!}`;
-            new mapboxgl.Marker(el{{ $key }})
-                .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
-            @isset($marker['description'])
-                .setPopup(new mapboxgl.Popup({
-                    offset: 25
-                }).setText('{{ $marker['description'] }}'))
-            @endisset
-            .addTo(map);
+
+            markerInLoop = new mapboxgl.Marker(el{{ $key }});
+
         @else
-            new mapboxgl.Marker()
-                .setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}])
+
+            markerInLoop = new mapboxgl.Marker();
+
+        @endif
+
+            markerInLoop.setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}]);
+
             @isset($marker['description'])
-                .setPopup(new mapboxgl.Popup({
+
+                markerInLoop.setPopup(new mapboxgl.Popup({
                     offset: 25
                 }).setText('{{ $marker['description'] }}'))
+
             @endisset
-            .addTo(map);
-        @endif
+
+            markerInLoop.addTo(map);
+
     @endforeach
+
+    markerInLoop = undefined;
 </script>
