@@ -40,7 +40,7 @@ jobs:
       - name: Install dependencies
         if: matrix.laravel == '11.*'
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:9.*" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:9.*" "pestphp/pest:2.*" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/pest
