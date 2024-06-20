@@ -9,7 +9,7 @@
         );
     @endif
 
-    const map = new mapboxgl.Map({
+    const map{{ $id }} = new mapboxgl.Map({
         container: '{{ $id }}',
         style: 'mapbox://styles/{{ $mapStyle }}',
         center: [{{ $center['long'] ?? $center[0] }}, {{ $center['lat'] ?? $center[1] }}],
@@ -20,22 +20,22 @@
 
     {{ $navigationControls ? 'map.addControl(new mapboxgl.NavigationControl());' : '' }}
 
-    map.on('load', function() {
-        map.resize();
+    map{{ $id }}.on('load', function() {
+        map{{ $id }}.resize();
     });
 
 
     @if ($draggable ?? '')
-        let long = 0;
-        let lat = 0;
-        const marker = new mapboxgl.Marker({
+        let long{{ $id }} = 0;
+        let lat{{ $id }} = 0;
+        const marker{{ $id }} = new mapboxgl.Marker({
                 draggable: true
             })
             .setLngLat([0, 0])
-            .addTo(map);
+            .addTo(map{{ $id }});
     @endif
 
-    let markerInLoop
+    let markerInLoop{{ $id }}
 
     @foreach ($markers as $key => $marker)
 
@@ -45,27 +45,23 @@
             el{{ $key }}.className = 'marker';
             el{{ $key }}.innerHTML = `{!! $marker['icon'] !!}`;
 
-            markerInLoop = new mapboxgl.Marker(el{{ $key }});
-
+            markerInLoop{{ $id }} = new mapboxgl.Marker(el{{ $key }});
         @else
 
-            markerInLoop = new mapboxgl.Marker();
-
+            markerInLoop{{ $id }} = new mapboxgl.Marker();
         @endif
 
-            markerInLoop.setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}]);
+        markerInLoop{{ $id }}.setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}]);
 
-            @isset($marker['description'])
+        @isset($marker['description'])
 
-                markerInLoop.setPopup(new mapboxgl.Popup({
-                    offset: 25
-                }).setText('{{ $marker['description'] }}'))
+            markerInLoop{{ $id }}.setPopup(new mapboxgl.Popup({
+                offset: 25
+            }).setText('{{ $marker['description'] }}'))
+        @endisset
 
-            @endisset
-
-            markerInLoop.addTo(map);
-
+        markerInLoop{{ $id }}.addTo(map{{ $id }});
     @endforeach
 
-    markerInLoop = undefined;
+    markerInLoop{{ $id }} = undefined;
 </script>

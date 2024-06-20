@@ -21,10 +21,10 @@
         "spatie/laravel-package-tools": "^1.11"
     },
     "require-dev": {
-        "nunomaduro/collision": "^6.0",
-        "orchestra/testbench": "^8.0",
+        "nunomaduro/collision": "^6.0|^7.0|^8.0",
+        "orchestra/testbench": "^8.0|^9.0",
         "pestphp/pest": "^1.10",
-        "pestphp/pest-plugin-laravel": "^1.1",
+        "pestphp/pest-plugin-laravel": "^1.1|^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
         "phpstan/phpstan-phpunit": "^1.0",

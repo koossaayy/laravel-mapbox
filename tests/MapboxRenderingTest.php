@@ -12,7 +12,6 @@ it('can render navigation control', function () {
     $view->assertSee('mapboxgl.NavigationControl()');
 });
 
-
 it('it can render markers', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'markers' => [
         ['lat' => '1', 'long' => '1'],
@@ -21,7 +20,6 @@ it('it can render markers', function () {
     $view->assertSee('mapboxgl.Marker()');
     $view->assertDontsee('description1');
 });
-
 
 it('it can render markers with description', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'markers' => [
@@ -49,7 +47,6 @@ it('can read token from config file', function () {
     $view->assertSee('token');
 });
 
-
 it('render map with default style', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map']);
     $view->assertSee('mapbox://styles/mapbox/streets-v11');
@@ -66,31 +63,25 @@ it('it can render map with center point', function () {
     $view->assertDontsee('[10, 12]');
 });
 
-
 it('it can render map with zoom', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'zoom' => 10]);
     $view->assertSee('10');
 });
-
 
 it('can render map with the styles passed', function () {
     $view = $this->blade('<x-mapbox id="map" style="height: 500px; max-width:600px; width: 500px;" />');
     $view->assertSee('height: 500px; max-width:600px; width: 500px;');
 });
 
-
 it('render map with the correspendant classes', function () {
     $view = $this->blade('<x-mapbox id="map" class="helloworld"  style="height: 500px; max-width:600px; width: 500px;" />');
     $view->assertSee('helloworld');
 });
 
-
-
 it('render map with rtl plugin when rtl config is enabled', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'rtl' => true]);
     $view->assertSee('mapbox-gl-rtl-text.js');
 });
-
 
 it('render map cooperative gestures ', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'cooperativeGestures' => true]);
@@ -118,4 +109,15 @@ it('render a custom marker icon', function () {
 it('can accept the position as param', function () {
     $view = $this->component(Mapbox::class, ['id' => 'map', 'position' => 'relative']);
     $view->assertSee('relative');
+});
+
+it('can render multiple maps in the same view', function () {
+    $view = $this->blade(
+        '<x-mapbox id="map1" /> <x-mapbox id="map2" /> <x-mapbox-search id="map4" /> <x-mapbox-search id="map5" />',
+    );
+
+    $view->assertSee('map1');
+    $view->assertSee('map2');
+    $view->assertSee('map4');
+    $view->assertSee('map5');
 });
