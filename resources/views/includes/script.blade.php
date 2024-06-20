@@ -26,9 +26,9 @@
 
 
     @if ($draggable ?? '')
-        let long = 0;
-        let lat = 0;
-        const marker = new mapboxgl.Marker({
+        let long{{ $id }} = 0;
+        let lat{{ $id }} = 0;
+        const marker{{ $id }} = new mapboxgl.Marker({
                 draggable: true
             })
             .setLngLat([0, 0])
