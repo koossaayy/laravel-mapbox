@@ -7,7 +7,7 @@
             true
         );
     @endif
-    const map = new mapboxgl.Map({
+    const map{{ $id }} = new mapboxgl.Map({
         container: '{{ $id }}',
         style: 'mapbox://styles/mapbox/streets-v11',
         center: [{{ $center['long'] ?? $center[0] }}, {{ $center['lat'] ?? $center[1] }}],
@@ -19,10 +19,10 @@
     {{ $navigationControls ? 'map.addControl(new mapboxgl.NavigationControl());' : '' }}
 
 
-    var geocoder = new MapboxGeocoder({
+    let geocoder{{ $id }} = new MapboxGeocoder({
         accessToken: mapboxgl.accessToken,
         mapboxgl: mapboxgl
     });
 
-    map.addControl(geocoder, '{{ $geocoderPosition }}');
+    map{{ $id }}.addControl(geocoder{{ $id }}, '{{ $geocoderPosition }}');
 </script>
