@@ -32,15 +32,15 @@ jobs:
         run: |
           echo "::add-matcher::${{ runner.tool_cache }}/php.json"
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
-      - name: Install dependencies
+      - name: Install dependencies for Laravel 10
         if: matrix.laravel == '10.*'
         run: |
           composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:8.*" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
-      - name: Install dependencies
+      - name: Install dependencies for Laravel 11
         if: matrix.laravel == '11.*'
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:9.*" "pestphp/pest:2.*" "nunomaduro/collision:7.*" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:9.*" "pestphp/pest:2.*" "pestphp/pest-plugin-laravel:2.*" "nunomaduro/collision:7.*" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
       - name: Execute tests
         run: vendor/bin/pest
