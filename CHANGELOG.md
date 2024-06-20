@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## Multiple Maps  - 2024-06-20
+
+This release added the ability to add multiple maps on the same page.
+
 ## 0.4.3 - 2023-08-05
 
 ### What's Changed
