@@ -111,16 +111,7 @@ it('can accept the position as param', function () {
     $view->assertSee('relative');
 });
 
-it('can render 2 maps', function () {
-    // $view = $this->component('view-name', [
-    //     'components' => [
-    //         [Mapbox::class, ['id' => 'map0', 'position' => 'relative']],
-    //         [Mapbox::class, ['id' => 'map1', 'position' => 'relative']]
-    //     ]
-    // ]);
-
-    // $view->assertSee('map0');
-    // $view->assertSee('map1');
+it('can render multiple maps in the same view', function () {
     $view = $this->blade(
         '<x-mapbox id="map1" /> <x-mapbox id="map2" /> <x-mapbox-search id="map4" /> <x-mapbox-search id="map5" />',
     );
@@ -129,5 +120,4 @@ it('can render 2 maps', function () {
     $view->assertSee('map2');
     $view->assertSee('map4');
     $view->assertSee('map5');
-
 });
