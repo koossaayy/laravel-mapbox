@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## HTML in description - 2024-09-10
+
+In this release, I've added the ability to set description as HTML code.
+
 ## Multiple Maps  - 2024-06-20
 
 This release added the ability to add multiple maps on the same page.
