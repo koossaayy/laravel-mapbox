@@ -54,10 +54,15 @@
         markerInLoop{{ $id }}.setLngLat([{{ $marker['long'] }}, {{ $marker['lat'] }}]);
 
         @isset($marker['description'])
-
-            markerInLoop{{ $id }}.setPopup(new mapboxgl.Popup({
-                offset: 25
-            }).setText('{{ $marker['description'] }}'))
+            @if (isset($marker['html']) && $marker['html'])
+                markerInLoop{{ $id }}.setPopup(new mapboxgl.Popup({
+                    offset: 25
+                }).setHTML(`{!! $marker['description'] !!}`))
+            @else
+                markerInLoop{{ $id }}.setPopup(new mapboxgl.Popup({
+                    offset: 25
+                }).setText(`{{ $marker['description'] }}`))
+            @endif
         @endisset
 
         markerInLoop{{ $id }}.addTo(map{{ $id }});
