@@ -133,6 +133,9 @@ $htmlString = '<p>Hello world</p>';
 
 If the array is missing the `html` key, it won't render the passed variable, so make sure to pass it if you want to render an HTML description.
 
+> **Note**
+> Please notice that `description` key accepts HTML, and it will render it, so if you are getting your data from your users, please make sure to sanitize it before using it.
+
 Also you can customize the marker icons, instead of using the default ones provided by Mapbox.
 To do so you can add `icon` key to the array of markers as follows:
 
