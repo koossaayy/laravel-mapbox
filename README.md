@@ -116,7 +116,25 @@ To add markers to your map, you can use the `:markers` attribute, as follows :
 ```
 
 The `:markers` attribute accepts an array of arrays, each array must have at least the `long` and `lat` keys.
-If you want to add a popup description, you may use the `description` key.
+If you want to add a popup description, you may use the `description` key. If you want to enable HTML description, you may add `html` key and set it to true to enable it. However there is a catch, you can't directly pass the HTML string, you should encapsulate it in a PHP variable and pass the variable to the array.
+For example:
+
+```php
+//Somewhere in your code
+$htmlString = '<p>Hello world</p>';
+```
+
+```html
+<x-mapbox
+    id="mapId"
+    :markers="[['lat' => 8, 'long' => 10, 'description' => $htmlString, 'html' => true], ['lat'=> 9, 'long' => 10]]"
+/>
+```
+
+If the array is missing the `html` key, it won't render the passed variable, so make sure to pass it if you want to render an HTML description.
+
+> **Note**
+> Please notice that `description` key accepts HTML, and it will render it, so if you are getting your data from your users, please make sure to sanitize it before using it.
 
 Also you can customize the marker icons, instead of using the default ones provided by Mapbox.
 To do so you can add `icon` key to the array of markers as follows:

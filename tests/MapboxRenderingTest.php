@@ -121,3 +121,17 @@ it('can render multiple maps in the same view', function () {
     $view->assertSee('map4');
     $view->assertSee('map5');
 });
+
+it('can render html description', function () {
+    $html = <<<HTML
+    <div class="card">
+        <p>Hello World</p>
+    </div>
+    HTML;
+
+    $view = $this->component(Mapbox::class, ['id' => 'map', 'markers' => [
+        ['lat' => '1', 'long' => '1', 'icon' => '<img src="https://placekitten.com/g/50/50" style="border-radius: 50%" />', 'html' => true, 'description' => $html],
+    ]]);
+
+    $view->assertSee('Hello World');
+});
