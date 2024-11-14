@@ -1,11 +1,14 @@
 <script>
     mapboxgl.accessToken = '{{ config('mapbox.mapbox_token', null) }}';
 
-    @if ($rtl)
+    const rtl = @json($rtl ?? null);
+    if (typeof rtl !== 'undefined' && rtl) {
         mapboxgl.setRTLTextPlugin(
-            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js', null,
-            true);
-    @endif
+            'https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-rtl-text/v0.2.3/mapbox-gl-rtl-text.js',
+            null,
+            true
+        );
+    }
 
     const map{{ $id }} = new mapboxgl.Map({
         container: '{{ $id }}',
