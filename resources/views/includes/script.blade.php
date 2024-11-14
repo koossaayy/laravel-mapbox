@@ -18,7 +18,7 @@
         cooperativeGestures: {{ $cooperativeGestures ? 'true' : 'false' }},
     });
 
-    {{ $navigationControls ? 'map.addControl(new mapboxgl.NavigationControl());' : '' }}
+    {{ $navigationControls ? 'map' . $id . '.addControl(new mapboxgl.NavigationControl());' : '' }}
 
     map{{ $id }}.on('load', function() {
         map{{ $id }}.resize();
