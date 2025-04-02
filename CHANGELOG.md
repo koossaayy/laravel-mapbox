@@ -2,6 +2,10 @@
 
 All notable changes to `laravel-mapbox` will be documented in this file.
 
+## Laravel 12 Support - 2025-04-02
+
+Added Laravel 12 Support
+
 ## HTML in description - 2024-09-10
 
 In this release, I've added the ability to set description as HTML code.
